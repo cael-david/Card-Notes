@@ -1,0 +1,13 @@
+# Dependências do Node
+node_modules/
+
+# Pastas de build e saída do Electron Forge
+out/
+dist/
+
+# Arquivos de sistema operacional
+.DS_Store
+Thumbs.db
+
+# Banco de dados local de testes (opcional, caso não queira subir o banco de dados de desenvolvimento)
+# meubanco.db
