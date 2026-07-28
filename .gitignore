@@ -11,3 +11,6 @@ Thumbs.db
 
 # Banco de dados local de testes (opcional, caso não queira subir o banco de dados de desenvolvimento)
 # meubanco.db
+
+java-runtime/
+out/
