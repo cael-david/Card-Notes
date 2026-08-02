@@ -18,25 +18,42 @@ public class CardService {
     public void deletarCard(Long id) {
         repository.deleteById(id);
     }
+
     public Card salvar(Card card) {
         if (card.getId() != null) {
             Card cardExistente = repository.findById(card.getId())
-                    .orElseThrow(() -> new RuntimeException("Card não encontrado" + card.getId()));
-            cardExistente.setTitulo(card.getTitulo());
-            cardExistente.setDescricao(card.getDescricao());
-            cardExistente.setAnotacoes(card.getAnotacoes());
-            cardExistente.setImagemCapa(card.getImagemCapa());
-            cardExistente.setOrdem(card.getOrdem());
+                    .orElseThrow(() -> new RuntimeException("Card não encontrado: " + card.getId()));
 
-            // Opcional: atualiza o parent caso tenha mudado de hierarquia
-            cardExistente.setParent(card.getParent());
+            if (card.getTitulo() != null) {
+                cardExistente.setTitulo(card.getTitulo());
+            }
+
+            if (card.getDescricao() != null) {
+                cardExistente.setDescricao(card.getDescricao());
+            }
+
+            if (card.getAnotacoes() != null) {
+                cardExistente.setAnotacoes(card.getAnotacoes());
+            }
+
+            if (card.getImagemCapa() != null && !card.getImagemCapa().trim().isEmpty()) {
+                cardExistente.setImagemCapa(card.getImagemCapa());
+            }
+
+            if (card.getOrdem() != null) {
+                cardExistente.setOrdem(card.getOrdem());
+            }
+
+            if (card.getParent() != null) {
+                cardExistente.setParent(card.getParent());
+            }
 
             return repository.save(cardExistente);
         }
 
-        // Se não tem ID, é um card totalmente novo
         return repository.save(card);
     }
+
 
     public List<Card> listarCardsPrincipais(){
         return repository.findByParentIsNullOrderByOrdem();

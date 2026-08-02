@@ -1,6 +1,7 @@
 package com.cardnotes.controller;
 
 import com.cardnotes.model.Card;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.cardnotes.service.CardService;
 
@@ -37,6 +38,7 @@ public class CardController {
         @PathVariable Long parentId){
         return cardService.listarCardsFilhos(parentId);
     }
+
 
     @DeleteMapping("/{id}")
     public void deletarCard(@PathVariable Long id){
